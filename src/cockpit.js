@@ -6,8 +6,21 @@
  * milliseconds.
  *
  */
-var CONFIG = require('./lib/config'), fs = require('fs'), express = require('express'), app = express(), server = require('http').createServer(app), io = require('socket.io').listen(server, { log: false, origins: '*:*' }), EventEmitter = require('events').EventEmitter, OpenROVCamera = require(CONFIG.OpenROVCamera), OpenROVController = require(CONFIG.OpenROVController), OpenROVArduinoFirmwareController = require('./lib/OpenROVArduinoFirmwareController'), logger = require('./lib/logger').create(CONFIG), mkdirp = require('mkdirp'), path = require('path');
+var CONFIG = require('./lib/config');
+var fs = require('fs');
+var express = require('express'); 
+var app = express(); 
+var server = require('http').createServer(app);
+var io = require('socket.io').listen(server, { log: false, origins: '*:*' });
+var EventEmitter = require('events').EventEmitter;
+var OpenROVCamera = require(CONFIG.OpenROVCamera); 
+var OpenROVController = require(CONFIG.OpenROVController); 
+var OpenROVArduinoFirmwareController = require('./lib/OpenROVArduinoFirmwareController');
+var logger = require('./lib/logger').create(CONFIG);
+var mkdirp = require('mkdirp');
+var path = require('path');
 var PluginLoader = require('./lib/PluginLoader');
+
 app.configure(function () {
   app.use(express.static(__dirname + '/static/'));
   app.use(express.json());
